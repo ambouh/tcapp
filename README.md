@@ -11,14 +11,19 @@ my implementations mostly focuses on UI. Thus, my goal was to familiarize myself
 * sees the contact details view displaying the contact-item's name, number, action icons (call, text)
   
 ### INSTALLING...
+Clone project
+```https://github.com/ambouh/tcapp.git```
+From the top-level directory, run
+```npm install```
 
+Open in Android Studio, and run app
 
 ### FEATURES TO UTILIZE
 * Kotlin: programming language to use for app development
 * Bio-metric sign in: user will sign in with registered finger-print
 * Fragments: views will be managed by fragments
 * ContraintsLayout: view item will be orginazed by
-* ListView: this
+* ListView: adapts to data and list
 * DataManager and Data Classes: implement a data management object to structure data 
 
 ### AUTHOR
