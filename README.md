@@ -11,7 +11,7 @@ my implementations mostly focuses on UI. Thus, my goal was to familiarize myself
 * sees the contact details view displaying the contact-item's name, number, action icons (call, text)
   
 ### INSTALLING...
-Clone project\
+Clone project
 ```
 https://github.com/ambouh/tcapp.git
 ```
