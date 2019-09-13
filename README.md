@@ -22,7 +22,7 @@ Open in Android Studio, and run app
 * Kotlin: programming language to use for app development
 * Bio-metric sign in: user will sign in with registered finger-print
 * Fragments: views will be managed by fragments
-* ContraintsLayout: view item will be orginazed by
+* ContraintsLayout: view item will be orginazed using ContraintsLayout
 * ListView: adapts to data and list
 * DataManager and Data Classes: implement a data management object to structure data 
 
