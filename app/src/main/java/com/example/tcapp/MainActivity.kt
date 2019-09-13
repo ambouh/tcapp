@@ -10,9 +10,21 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.View
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.fragment.app.Fragment
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LoginFragment.OnLogin {
+    override fun onLogin() {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        //replace fragments
+        fragmentTransaction.replace(R.id.root_layout, ContactListFragment.newInstance(), ContactListFragment.toString())
+        fragmentTransaction.commit()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +37,10 @@ class MainActivity : AppCompatActivity() {
                 // 3
                 .beginTransaction()
                 // 4
-                .add(R.id.root_layout, ContactListFragment.newInstance(), "Login Fragment")
+                .add(R.id.root_layout, LoginFragment.newInstance(), LoginFragment.toString())
                 // 5
                 .commit()
         }
     }
 
-    fun sendBroadcast(v: View) {
-        val intent = Intent("com.example.LoginFragment");
-    }
-
-
 }
-
