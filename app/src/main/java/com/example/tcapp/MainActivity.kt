@@ -15,16 +15,15 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.fragment.app.Fragment
 
 
-class MainActivity : AppCompatActivity(), LoginFragment.OnLogin {
-    override fun onLogin() {
+class MainActivity : AppCompatActivity(), FragmentChangeListener {
+    override fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        //replace fragments
-        fragmentTransaction.replace(R.id.root_layout, ContactListFragment.newInstance(), ContactListFragment.toString())
+        //replace fragments dynamically
+        fragmentTransaction.replace(R.id.root_layout, fragment, fragment.toString())
         fragmentTransaction.commit()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,4 +42,8 @@ class MainActivity : AppCompatActivity(), LoginFragment.OnLogin {
         }
     }
 
+}
+
+interface FragmentChangeListener {
+    fun replaceFragment(fragment: Fragment)
 }
