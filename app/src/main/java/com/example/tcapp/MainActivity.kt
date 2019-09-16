@@ -12,6 +12,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.View
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 import androidx.fragment.app.Fragment
 
 
@@ -20,8 +21,11 @@ class MainActivity : AppCompatActivity(), FragmentChangeListener {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
+
+        // Log.d("aaa" , fragment.toString())
         //replace fragments dynamically
         fragmentTransaction.replace(R.id.root_layout, fragment, fragment.toString())
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 

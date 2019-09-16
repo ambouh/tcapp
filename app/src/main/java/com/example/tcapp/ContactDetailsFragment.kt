@@ -10,14 +10,13 @@ import java.lang.ClassCastException
 
 class ContactDetailsFragment: Fragment() {
     companion object {
-        fun newInstance(): ContactListFragment {
-            return  ContactListFragment()
+        fun newInstance(): ContactDetailsFragment {
+            return  ContactDetailsFragment()
         }
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.contact_details_fragment, container, false)
-        return rootView
+        return inflater.inflate(R.layout.contact_details_fragment, container, false)
     }
 }
