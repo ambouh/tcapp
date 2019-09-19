@@ -9,6 +9,7 @@ import android.hardware.biometrics.BiometricPrompt
 import android.hardware.fingerprint.FingerprintManager
 import android.os.Build
 import android.os.Bundle
+import android.os.CancellationSignal
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import java.util.concurrent.Executors
 class LoginFragment: Fragment() {
     private lateinit var btnListener: FragmentChangeListener
     private lateinit var tvstatus: TextView
+    private lateinit var cancellationSignal: CancellationSignal
 
 
     companion object {
@@ -69,22 +71,46 @@ class LoginFragment: Fragment() {
             } else {
                 tvstatus.text = "Finger authentication is ready for testing"
 
-               /* //set up the authentication dialog
-                val executor = Executors.newSingleThreadExecutor()
 
                 //Authenticate with callback functions
-
-                val biometricPrompt = BiometricPrompt.authenticate(fragmentActivity, executor,
-                    object : BiometricPrompt.AuthenticationCallback() {})
-
-                // configuring the prompt
+                val executor = rootView.context.mainExecutor
+                val cancelListener = DialogInterface.OnClickListener { _, _ -> }
+                cancellationSignal = CancellationSignal()
                 val cancelString = fragmentActivity.getString(android.R.string.cancel)
-                val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                    .setTitle("Prompt Title") // required
-                    .setSubtitle("Prompt Subtitle")
-                    .setDescription("Prompt Description: lorem ipsum")
-                    .setNegativeButtonText(cancelString) // required
-                    .build()*/
+
+                var biometricPrompt : BiometricPrompt = BiometricPrompt.Builder(context)
+                    .setTitle("Title")
+                    .setSubtitle("Subtitle")
+                    .setDescription("Description")
+                    .setNegativeButton(cancelString, executor, cancelListener)
+                    .build()
+
+                biometricPrompt.authenticate(
+                    cancellationSignal, executor,
+                    object : BiometricPrompt.AuthenticationCallback() {
+                        override fun onAuthenticationError(
+                            errorCode: Int,
+                            errString: CharSequence?
+                        ) {
+                            super.onAuthenticationError(errorCode, errString)
+                        }
+
+                        override fun onAuthenticationFailed() {
+                            super.onAuthenticationFailed()
+                        }
+
+                        override fun onAuthenticationHelp(
+                            helpCode: Int,
+                            helpString: CharSequence?
+                        ) {
+                            super.onAuthenticationHelp(helpCode, helpString)
+                        }
+
+                        override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+                            showOtherFragment()
+                        }
+                    }
+                )
             }
         }
 
