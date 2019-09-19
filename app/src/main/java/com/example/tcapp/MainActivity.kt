@@ -1,5 +1,6 @@
 package com.example.tcapp
 import android.content.Intent
+import android.hardware.fingerprint.FingerprintManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
